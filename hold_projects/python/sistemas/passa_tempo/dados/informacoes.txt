@@ -1,0 +1,2 @@
+1 bilhetes sao necessarios para cada jogada, o numero maximo de bilhetes que podes comprar e dez, se o sistema detectar que tentou comprar mais do que o limite a compra nao sera efectuada
+2

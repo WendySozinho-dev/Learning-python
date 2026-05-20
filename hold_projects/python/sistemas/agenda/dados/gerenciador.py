@@ -1,0 +1,4 @@
+
+
+def armazenar(list):
+    pass
