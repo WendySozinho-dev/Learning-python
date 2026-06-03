@@ -129,24 +129,24 @@ def musculos(diretorio_origem,diretorio_final,dicionario_series):
                     break
 
 
-
-
 #==========================================================
 # O CÉREBRO: PROCESSA, QUESTIONA E GERENCIA
 # ==========================================================
 
 # para armazenamento dos dados, ao invez de usar um txt, usarei um JSON
+configuracao = {}
 try:
-    with open("ngc_init.json","r"):
-        pass
+    with open("ngc_init.json","r",encoding = 'utf-8') as arquivo:
+        configuracao = json.load(arquivo)
 except FileNotFoundError:
 
+    raiz_principal = os.path.expanduser("~")
+    
+    sistemas = ("android","windous","linux")
+    menu(cabecalho = "sistemas",lista = sistemas)
     while True:
-        sistemas = ("android","windous","linux")
-        menu(cabecalho = "sistemas",lista = sistemas)
         entrada = str(input("digite o numero da opcao do seu sistema operacional    "))
         entrada = leiaint(entrada)
-
         if existe(entrada,sistemas):
             break
 
@@ -154,7 +154,7 @@ except FileNotFoundError:
         raiz_android = "/storage/emulated/0"
         if raiz_android != raiz_principal:
             print("detectei que estas a usar algum aplicativo como termux!")
-            menu(cabecalho="pretende usar", lista=(raiz_principal, raiz_android))
+            menu(cabecalho = "pretende usar", lista=(raiz_principal, raiz_android))
             entrada_menu = leiaint(input())
 
             # verificando a raiz selecionada
@@ -165,15 +165,27 @@ except FileNotFoundError:
         
         # validando o caminho digitado pelo usuario no Android
         while True:
-            entrada_pasta = str(input("digite o caminho dos arquivos (ex: download/animes):\n"))
-            entrada_usuario = os.path.join(raiz, entrada_pasta.replace("\\", "/").lstrip("/"))
+            entrada_inicial_pasta = str(input("digite o caminho dos arquivos (ex: download/animes):\n"))
+            entrada_inicial_usuario = os.path.join(raiz, entrada_inicial_pasta.replace("\\", "/").lstrip("/"))
 
-            lista_caotica = visao(entrada_usuario)
+            lista_caotica = visao(entrada_inicial_usuario)
 
             if lista_caotica is not False:  # A visão retornou dados!
                 break
             else:
                 escreva("erro, diretorio inexistente no android")
+        
+        while True:
+            entrada_final_pasta = str(input("digite o caminho final dos arquivos\n(\033[33mpara onde os arquivos irao\033[m)\n"))
+            entrada_final_usuario = os.path.join(raiz, entrada_final_pasta.replace("\\","/").lstrip("/"))
+            
+            lista_caotica = visao(entrada_final_usuario)
+
+            if lista_caotica is not False:
+                break
+            else:
+                escreva("erro, diretorio i.existente no android")
+                
 
     else:
         # Se for PC, usamos a home expansível
@@ -182,23 +194,79 @@ except FileNotFoundError:
         # validando o caminho digitado pelo usuario no PC
         while True:
             entrada_pasta = str(input("digite o diretorio use [\\ ou /] como separador ex: downloads/series:\n"))
+            # validando o caminho para windous
             if entrada == 2:
                 entrada_limpa = entrada_pasta.replace("/", "\\").lstrip("\\")
+            # validando o caminho para linux
             else:
                 entrada_limpa = entrada_pasta.replace("\\", "/").lstrip("/")
             # Junta a raiz Home do PC com a pasta limpa
-            entrada_usuario = os.path.join(raiz, entrada_limpa)
+            entrada_inicial_usuario = os.path.join(raiz, entrada_limpa)
 
-            lista_caotica = visao(entrada_usuario)
+            lista_caotica = visao(entrada_inicial_usuario)
 
             if lista_caotica is not False:  # A visão retornou dados!
                 break
             else:
                 escreva("erro diretorio invalido tente novamente")
 
-    # Exibe o troféu final capturado pela visão
-    print("\n\033[32m[Conteúdo Bruto Capturado pela Visão]:\033[m")
-    print(lista_caotica)
+        del lista_caotica
+        while True:
+            entrada_pasta = str(input("digite o diretorio para onde vao os arquivos\n"))
+            if entrada == 2:
+                entrada_limpa = entrada_pasta.replace("/","\\").lstrip("\\")
+            else:
+                entrada_limpa = entrada_pasta.replace("\\","/").lstrip("/")
+            entrada_final_usuario = os.path.join(raiz,entrada_limpa)
+
+            lista_caotica = visao(entrada_final_usuario)
+
+            if lista_caotica is not False:
+                break
+            else:
+                escreva("diretorio invalido tente novamente")
+            del lista_caotica
+            
+    configuracao["origem"] = entrada_inicial_usuario
+    configuracao["fim"] = entrada_final_usuario
+    #escrevendo tudo no ngc_init.json
+    with open("ngc_init.json","w",encoding = 'utf-8') as arquivo:
+        json.dump(configuracao,arquivo,indent = 4, ensure_ascii = False)
+            
+
+except:
+    escreva("ocoreu um erro  isso nao e o seu problema, mas sim do programador!")
+
+else:
+    # listando todos os arquivos do diretorio inicial
+    extensoes = (".mp4",".mkv",".avi",".webm")
+    arquivos_brutos = visao(configuracao["origem"])
+
+    escreva("eis os arquivos brutos")
+    print(arquivos_brutos)
+    videos = list()
+
+    for arquivo in arquivos_brutos:
+        nome,extensao = os.path.splitext(arquivo)
+        if extensao in extensoes:
+            videos.append(arquivo)
+    
+
+    del arquivos_brutos
+
+    escreva("eis os videos")
+    print(videos)
+
+
+    lista_de_videos = analizador(videos)
+    del videos
+
+    # movendo os arquivos para o diretorio exato
+    musculos(configuracao["origem"],configuracao["fim"],lista_de_videos)
+
+
+
+
 
 
 
