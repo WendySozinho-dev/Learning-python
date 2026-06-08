@@ -5,7 +5,7 @@ import shutil
 
 def analizador(teste):
     """
-     essa função analiza um grupo de arquivos e agrupa em séries pelos seus nomes usando regex
+     essa função analisa um grupo de arquivos e agrupa em séries pelos seus nomes usando regex
      
      Padrões suportados:
         - Padrão 1: "Breaking Bad 5.mp4" (Nome + Espaço + Número)
@@ -54,7 +54,7 @@ def analizador(teste):
 
 def existe(item, lista):  
     """ 
-    confirma se o item, que e um numero inteiro, se esta entre len(lista)
+    confirma se o item, que é um numero inteiro, está entre len(lista)
     
     args:
         item (int):  o item que queremos verificar a existência na lista
@@ -62,7 +62,7 @@ def existe(item, lista):
         lista (list): a lista onde queremos verificar o item
 
     returns:
-        bool: retorna True se o item estiven entre len(lista) e False se for o contrário
+        bool: retorna True se o item estiver entre len(lista) e False se for o contrário
     """
     valor = leiaint(item)
     caixa = len(lista)
@@ -140,7 +140,7 @@ def leiaint(valor):
     responsavel por ler um numero inteiro e retorna esse valor
 
     args:
-        valor (str): o caractere que será convertido em um valor inteira
+        valor (str): o caractere que será convertido em um valor inteiro
 
     returns:
             int: o valor garantido que é um inteiro
