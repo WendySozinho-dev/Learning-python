@@ -1,0 +1,2 @@
+def ouvir():
+    pass
