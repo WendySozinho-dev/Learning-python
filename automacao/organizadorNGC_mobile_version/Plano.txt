@@ -1,6 +1,6 @@
 agora, esse programa deve ser modularizado e deve:
 
-1: integrar com a interface gráfica do explorerNHC
+1: integrar com a interface gráfica do explorerNGC
 
 2: ter a opção onde o usuario seleciona um texto padrão e o formato para procurar
 ex: todo áudio cujo o nome tem "piano"
