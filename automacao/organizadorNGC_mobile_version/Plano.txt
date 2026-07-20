@@ -6,3 +6,8 @@ agora, esse programa deve ser modularizado e deve:
 ex: todo áudio cujo o nome tem "piano"
 
 3: atualizar certas funções como menu, leiaint e leiareal, para as funções do assistenteNGC
+
+
+como funciona?
+agora ele deve ter vários diretórios iniciais e finais
+
