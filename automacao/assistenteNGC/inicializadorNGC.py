@@ -123,8 +123,18 @@ class explorerNGC(App[str]): # o [str] indica que o app retorna uma string
 
 
 if __name__ == "__main__":
-    app = explorerNGC()
-    diretory=app.run()
+    # app = explorerNGC()
+    # diretory=app.run()
 
-    print(diretory)
+    try:
+        with open("ngc_init.txt","r") as file:
+            diretory = file.read()
+    except FileNotFoundError:
+        app = explorerNGC()
+        diretory = app.run()
+        with open("ngc_init.txt","w") as file:
+            file.write(diretory)
+
+
+    
 

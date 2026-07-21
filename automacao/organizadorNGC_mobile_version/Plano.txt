@@ -7,7 +7,9 @@ ex: todo áudio cujo o nome tem "piano"
 
 3: atualizar certas funções como menu, leiaint e leiareal, para as funções do assistenteNGC
 
+4: deve ser capaz de rastrear todo o armazenamento interno em busca do arquivo alvo
 
 como funciona?
 agora ele deve ter vários diretórios iniciais e finais
+
 

@@ -1,3 +1,7 @@
 __pycache__/
 *.pyc
 testes/
+*.txt
+*.json
+*teste*/
+*texte*/

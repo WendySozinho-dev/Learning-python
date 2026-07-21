@@ -3,10 +3,34 @@ from tools.Get_input import get_input
 from tools.Musculos import musculos
 from tools.Visao import visao
 from tools.Existencia import existe
+from tools.Analisador import analisador
 from tools.explorerNGC import explorerNGC
 from tools.Json_io import json_read, json_write, json_scan
 import json
 import os
+import re
+
+
+def integrador():
+       # varrendo as pastas iniciais
+        clean_list = list()
+        files = list()
+        for diretory in ngc_init['inicio']:
+            files.append(visao(diretory))
+            # teremos listas dentro de lista
+        
+        # agora, vamos passar o pente fino nos arquivos
+        for package in files:
+            # agora, temos uma lista com dicionarios
+            clean_list.append(analisador(package))        
+        
+        counter = 0 
+        for diretory in ngc_init['fim']:
+            # aqui vamos jogar os arquivos em seus respectivos diretorios
+            musculos(diretorio_origem = ngc_init['inicio'][counter], diretorio_final = diretory, dicionario_series = clean_list[counter])
+            counter += 1
+
+
 
 # primeiro, detectar se existe o arquivo de inicialização
 ngc_init = {}
@@ -31,8 +55,7 @@ except FileNotFoundError:
 else:
     if ngc_init['varredura_automatica'] == True:
         # iniciando a varredura automática nos diretórios
-        pass
-
+        integrador()
 """
 agora, no salvamento dos diretórios, não basta só dizer:
 {
@@ -55,7 +78,7 @@ assim podemos ter vários diretórios para vasculhar arquivos
 # aqui vamos criar um a inteface do sistema
 comands = ('sair',
             'organizar o diretório',
-            'organizar os diretórios na inicialização',
+            'habilitar organisação dos diretórios na inicialização',
             'adicionar diretório de vasculha',
            'eliminar diretorio de vasculha')
 while True:
@@ -67,10 +90,12 @@ while True:
             break
 
         elif user_input == 2:
-            pass
+            integrador()
 
         elif user_input == 3:
-            pass
+            ngc_init['varredura_automatica'] = True
+            json_write(path = '', file = 'ngc_init.json', dictionary = ngc_init)
+            print('opção varredura automática ativada em ngc_init.json')
 
         elif user_input == 4:
             pass

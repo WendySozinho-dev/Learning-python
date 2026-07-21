@@ -4,5 +4,6 @@
     ],
     "fim": [
         "/data/data/com.termux/files/home/python/projetos/automacao/organizadorNGC_mobile_version/testes/fim"
-    ]
+    ],
+    "varredura_automatica": true
 }

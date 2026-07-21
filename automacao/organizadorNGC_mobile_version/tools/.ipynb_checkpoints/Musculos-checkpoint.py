@@ -1,3 +1,6 @@
+import os
+import shutil
+
 # a função que move os arquivos
 
 #====================================================================
