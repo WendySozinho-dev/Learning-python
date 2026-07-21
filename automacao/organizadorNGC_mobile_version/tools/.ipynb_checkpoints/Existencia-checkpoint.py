@@ -12,7 +12,7 @@ def existe(item, lista):
     returns:
         bool: retorna True se o item estiver entre len(lista) e False se for o contrário
     """
-    valor = leiaint(item)
+    valor = int(item)
     caixa = len(lista)
     if valor > 0 and valor <= caixa:
         return True

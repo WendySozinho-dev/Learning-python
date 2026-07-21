@@ -4,14 +4,14 @@ import os
 # função que escaneia um arquivo json
 def json_scan(path,file):
     #verificando se a a pasta existe
-    if not os.path.exists(path):
-        print(f"{path} não é um diretório")
-        return None
+    if not os.path.exists(os.path.join(path, file)):
+        print(f"{os.path.join(path, file)} não é um diretório")
+        return False
     
     # verificando a terminacao
     if file[-5::] != ".json":
         print(f"{file} não é um json!")
-        return None
+        return False
     else:
         return file
 
@@ -31,13 +31,10 @@ def json_read(path,file):
 
 # função de escrita
 def json_write(path,file,dictionary):
-
-
     diretory = os.path.join(path,file)
+    with open(diretory,'w', encoding = 'utf-8') as f:
+        json.dump(dictionary, f, indent = 4, ensure_ascii = False)
+            
 
-    if not os.path.exists(path):
-        print(f"{path} não é um diretório")
-        return None
-    else:
-        with open(diretory,'w', encoding = 'utf-8') as f:
-            json.dump(dictionary, f, indent = 4, ensure_ascii = False)
+
+
