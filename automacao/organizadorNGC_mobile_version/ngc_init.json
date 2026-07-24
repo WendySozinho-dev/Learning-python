@@ -1,9 +1,13 @@
 {
     "inicio": [
-        "/data/data/com.termux/files/home/python/projetos/automacao/organizadorNGC_mobile_version/testes/inicio"
+        "/data/data/com.termux/files/home/python/projetos/automacao/organizadorNGC_mobile_version/testes/inicio",
+        "/data/data/com.termux/files/home/python/projetos/automacao/organizadorNGC_mobile_version/testes/inicio2",
+        "/data/data/com.termux/files/home/python/projetos/automacao/organizadorNGC_mobile_version/testes/inicio3"
     ],
     "fim": [
-        "/data/data/com.termux/files/home/python/projetos/automacao/organizadorNGC_mobile_version/testes/fim"
+        "/data/data/com.termux/files/home/python/projetos/automacao/organizadorNGC_mobile_version/testes/fim",
+        "/data/data/com.termux/files/home/python/projetos/automacao/organizadorNGC_mobile_version/testes/fim2",
+        "/data/data/com.termux/files/home/python/projetos/automacao/organizadorNGC_mobile_version/testes/fim3"
     ],
-    "varredura_automatica": true
+    "varredura_automatica": false
 }
