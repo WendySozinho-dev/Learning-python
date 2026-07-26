@@ -1,6 +1,7 @@
 # criando uma função que vai nasculhar 
 import re
-def scanner(standard_text,files,scan_format = 'near'):
+import os
+def scanner(standard_text,files, path = True):
     """
     função de escaeamento que permite escanear uma lista de devolver
     outra lista com o conteudo filtrado
@@ -24,18 +25,19 @@ def scanner(standard_text,files,scan_format = 'near'):
 
     match = ""
     files_found = []
-    if scan_format == 'near':
+    if path == False:
         # iniciando um loop para vreificar as sequencias
         for file in files:
             match = standard.findall(file)
             if match:
                 files_found.append(file)
         return files_found
-    
-    elif scan_format == 'literal':
-        # iniciando um loop para vreificar as sequencias
+
+    else:
         for file in files:
-            match = standard.match(file)
+            match = standard.findall(os.path.basename(file))
             if match:
                 files_found.append(file)
         return files_found
+    
+

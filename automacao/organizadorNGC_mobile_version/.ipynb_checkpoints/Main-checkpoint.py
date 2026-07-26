@@ -97,7 +97,7 @@ comands = (
             'que programa é esse?',
             'adicionar diretório de vasculha',
             'eliminar diretorio de vasculha',
-            'desabilitar organisação dps diretórios na inicialização',
+            'desabilitar organisação dos diretórios na inicialização',
             'procurar um item em todo armazenamento interno'
           )
 while True:
@@ -180,19 +180,28 @@ while True:
             print('varrendo o armazenamento')
             internal_storage = radar(main_root)
             print('varredura concluida')
-            # agora, vamos perguntar ao usuário se ele quer fazer uma busca aproximada ou busca literal
-            scanner_options = ('procurar por aproximação','prcura literal')
-            menu(items = scanner_options, header = 'método de busca')
-            entrada = get_input(message = 'digite o número do comando  ',item_type = int)
-            if existe(entrada,scanner_options):
-                if entrada == 1:
-                    entrada = ''
-                    while entrada != '//':
-                        entrada = input('\n\n\033[36mdigite o que procura digite // para parar\033[m  ')
-                        found_items = scanner(standard_text = entrada, files = internal_storage)
-                        print(f'\n\n{found_items}')
-                else:
-                    print('opção em construção (- -)')
+            
+            options = ('mover os arquivos','deletar os arquivos','nada')
+            while True:
+                entrada = input('\n\n\033[36mdigite o que procura digite // para parar\033[m  ')
+                if entrada == '//':
+                    break
+                found_items = scanner(standard_text = entrada, files = internal_storage)
+                print(f'\n\n{found_items}\n\n\n')
+                            
+                # agora, vamos pegar os arquivos e fazer alguma coisa
+                menu(items = options, header = 'ação')
+                action = get_input(message = 'digite o número do comando  ',item_type = int)
+                if existe(item = action, lista = options):
+                    # opção de mover arquivos
+                    input('selecione o diretório para mover esses arquivos\n[enter para avançar]    ')
+                    final_dir = explorerNGC().run()
+                    # agora que obtemos o destino, vamos mover e tratar duplicadod
+                    # para isso, vamos mover os arquivos com o mesmo nome para uma pasta
+                    # chamada 'duplicados' que iremos criar no destino caso haja algum duplicado
+                
+                   
+                
             
         
     else:
